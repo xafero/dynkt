@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.script.Bindings;
@@ -32,8 +35,11 @@ public class KotlinScriptEngineTest {
 		engine = null;
 	}
 
-	private InputStreamReader getStream(String name) {
-		return new InputStreamReader(getClass().getResourceAsStream(name));
+	private InputStreamReader getStream(String name) throws FileNotFoundException {
+		InputStream res = getClass().getResourceAsStream(name);
+		if (res == null)
+			res = new FileInputStream("src/test/java/" + "com/xafero/dynkt/" + name);
+		return new InputStreamReader(res);
 	}
 
 	@Test
