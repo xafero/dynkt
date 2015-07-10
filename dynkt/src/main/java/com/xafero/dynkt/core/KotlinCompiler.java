@@ -68,7 +68,7 @@ public class KotlinCompiler implements MessageCollector, Disposable {
 		List<AnalyzerScriptParameter> scriptParams = new LinkedList<AnalyzerScriptParameter>();
 		scriptParams.addAll(CommandLineScriptUtils.scriptParameters());
 		// Bundle injection
-		JetType type = KotlinBuiltIns.getInstance().getMap().getDefaultType();
+		JetType type = KotlinBuiltIns.getInstance().getMutableMap().getDefaultType();
 		Name ctxName = Name.identifier("ctx");
 		scriptParams.add(new AnalyzerScriptParameter(ctxName, type));
 		// Finish configuration
