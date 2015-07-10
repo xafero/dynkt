@@ -68,6 +68,15 @@ public class KotlinScriptEngineTest {
 	}
 
 	@Test
+	public void testEvalFromFile3() throws FileNotFoundException, ScriptException {
+		InputStreamReader code = getStream("hello2.kt");
+		Object result = engine.eval(code);
+		assertNotNull(result);
+		assertEquals("main", result.getClass().getDeclaredMethods()[0].getName());
+		assertEquals("hello", result.getClass().getPackage().getName());
+	}
+
+	@Test
 	public void testCompileFromFile() throws Exception {
 		InputStreamReader code = getStream("tree.kts");
 		CompiledScript script = ((Compilable) engine).compile(code);
