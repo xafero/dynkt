@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.script.Bindings;
 import javax.script.Compilable;
@@ -15,6 +17,7 @@ import javax.script.CompiledScript;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -50,6 +53,18 @@ public class KotlinScriptEngineTest {
 		Object result = engine.eval(code, bnd);
 		assertNotNull(result);
 		assertEquals("getFolders", result.getClass().getDeclaredMethods()[0].getName());
+	}
+
+	@Test
+	public void testEvalFromFile2() throws FileNotFoundException, ScriptException {
+		InputStreamReader code = getStream("hello1.kt");
+		StringWriter out;
+		Bindings bnd = engine.createBindings();
+		bnd.put("out", new PrintWriter(out = new StringWriter()));
+		Object result = engine.eval(code, bnd);
+		assertNotNull(result);
+		assertEquals("main", result.getClass().getDeclaredMethods()[0].getName());
+		assertEquals("Hello, World!", out.toString().trim());
 	}
 
 	@Test
