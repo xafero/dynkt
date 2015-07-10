@@ -77,6 +77,39 @@ public class KotlinScriptEngineTest {
 	}
 
 	@Test
+	public void testCompileFromFile2() throws FileNotFoundException, ScriptException {
+		InputStreamReader code = getStream("nameread.kt");
+		CompiledScript result = ((Compilable) engine).compile(code);
+		assertNotNull(result);
+		// First time
+		Bindings bnd1 = engine.createBindings();
+		StringWriter ret1;
+		bnd1.put("out", new PrintWriter(ret1 = new StringWriter()));
+		assertNotNull(result.eval(bnd1));
+		assertEquals("Provide a name", ret1.toString().trim());
+		// Second time
+		Bindings bnd2 = engine.createBindings();
+		bnd2.put(ScriptEngine.ARGV, new String[] { "Amadeus" });
+		StringWriter ret2;
+		bnd2.put("out", new PrintWriter(ret2 = new StringWriter()));
+		assertNotNull(result.eval(bnd2));
+		assertEquals("Hello, Amadeus!", ret2.toString().trim());
+	}
+
+	@Test
+	public void testEvalFromFile5() throws FileNotFoundException, ScriptException {
+		InputStreamReader code = getStream("oo-hello.kt");
+		Bindings bnd = engine.createBindings();
+		bnd.put(ScriptEngine.ARGV, new String[] { "Rüdiger" });
+		Object result = engine.eval(code, bnd);
+		assertNotNull(result);
+		assertEquals("main", result.getClass().getDeclaredMethods()[0].getName());
+		Object greeter = bnd.get("result");
+		assertEquals("getName", greeter.getClass().getDeclaredMethods()[0].getName());
+		assertEquals("greet", greeter.getClass().getDeclaredMethods()[1].getName());
+	}
+
+	@Test
 	public void testCompileFromFile() throws Exception {
 		InputStreamReader code = getStream("tree.kts");
 		CompiledScript script = ((Compilable) engine).compile(code);
