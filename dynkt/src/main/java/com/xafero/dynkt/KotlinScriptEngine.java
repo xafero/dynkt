@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 import javax.script.AbstractScriptEngine;
 import javax.script.Bindings;
@@ -19,6 +21,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.xafero.dynkt.core.KotlinCompiledScript;
 import com.xafero.dynkt.core.KotlinCompiler;
+import com.xafero.dynkt.util.ReflUtils;
 
 public class KotlinScriptEngine extends AbstractScriptEngine implements ScriptEngine, Compilable {
 
@@ -54,15 +57,27 @@ public class KotlinScriptEngine extends AbstractScriptEngine implements ScriptEn
 	public Object evalClass(Class<?> clazz, Bindings ctx) throws ScriptException {
 		try {
 			String[] args = (String[]) ctx.get(ScriptEngine.ARGV);
-			Constructor<?> constr = clazz.getConstructor(String[].class);
-			return constr.newInstance(new Object[] { args });
+			// Fix arguments if null
+			if (args == null)
+				args = new String[0];
+			// Get constructor and invoke that
+			Constructor<?> constr = clazz.getConstructor(String[].class, Map.class);
+			// Create new instance
+			Object[] invArgs = new Object[] { args, ctx };
+			Object obj = constr.newInstance(invArgs);
+			// Invoke main method if given (non-script)
+			Method mainMth;
+			if ((mainMth = ReflUtils.findMethod(clazz, "main", String[].class)) != null)
+				mainMth.invoke(obj, new Object[] { args });
+			// Return it!
+			return obj;
 		} catch (Exception e) {
 			throw new ScriptException(e);
 		}
 	}
 
-	public Class<?> compileScript(File file) {
-		return compiler.compileScript(file);
+	public Class<?> compileScript(File file, Bindings bnd) {
+		return compiler.compileScript(file, bnd);
 	}
 
 	@Override
