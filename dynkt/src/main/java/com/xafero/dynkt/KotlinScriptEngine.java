@@ -76,8 +76,8 @@ public class KotlinScriptEngine extends AbstractScriptEngine implements ScriptEn
 		}
 	}
 
-	public Class<?> compileScript(File file, Bindings bnd) {
-		return compiler.compileScript(file, bnd);
+	public Class<?> compileScript(File file) {
+		return compiler.compileScript(file);
 	}
 
 	@Override

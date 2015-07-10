@@ -4,8 +4,10 @@ import static org.jetbrains.kotlin.cli.jvm.config.ConfigPackage.addJvmClasspathR
 import static org.jetbrains.kotlin.config.ConfigPackage.addKotlinSourceRoot;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.jetbrains.kotlin.builtins.KotlinBuiltIns;
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys;
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments;
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation;
@@ -18,7 +20,9 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler;
 import org.jetbrains.kotlin.cli.jvm.config.JVMConfigurationKeys;
 import org.jetbrains.kotlin.config.CompilerConfiguration;
+import org.jetbrains.kotlin.name.Name;
 import org.jetbrains.kotlin.resolve.AnalyzerScriptParameter;
+import org.jetbrains.kotlin.types.JetType;
 import org.jetbrains.kotlin.utils.KotlinPaths;
 import org.jetbrains.kotlin.utils.PathUtil;
 import org.slf4j.Logger;
@@ -60,8 +64,14 @@ public class KotlinCompiler implements MessageCollector, Disposable {
 	private CompilerConfiguration createCompilerConfig(File file) {
 		CompilerConfiguration config = new CompilerConfiguration();
 		config.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, this);
-		List<AnalyzerScriptParameter> scriptParams = CommandLineScriptUtils.scriptParameters();
-		// TODO: Bundle injection?
+		// Put arguments as field
+		List<AnalyzerScriptParameter> scriptParams = new LinkedList<AnalyzerScriptParameter>();
+		scriptParams.addAll(CommandLineScriptUtils.scriptParameters());
+		// Bundle injection
+		JetType type = KotlinBuiltIns.getInstance().getMap().getDefaultType();
+		Name ctxName = Name.identifier("ctx");
+		scriptParams.add(new AnalyzerScriptParameter(ctxName, type));
+		// Finish configuration
 		config.put(JVMConfigurationKeys.SCRIPT_PARAMETERS, scriptParams);
 		addJvmClasspathRoots(config, PathUtil.getJdkClassesRoots());
 		addKotlinSourceRoot(config, file.getAbsolutePath());
