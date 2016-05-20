@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+    <feature id="com.xafero.dynkt.feature"
+             version="0.12.613"
+             url="features/com.xafero.dynkt.feature_0.0.1.jar">
+        <category name="com.xafero.dynkt.category"/>
+    </feature>    
+	<category-def  name="com.xafero.dynkt.category" 
+                  label="DynKt Category">
+		<description>
+         This is the category for DynKt.
+		</description>
+	</category-def>
+</site>

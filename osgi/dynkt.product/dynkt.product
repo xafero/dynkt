@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+<product   name="DynKt" 
+	        uid="com.xafero.dynkt.product" 
+	    version="0.12.613" 
+    useFeatures="true" 
+	includeLaunchers="false">
+	<configIni use="default"></configIni>
+	<launcherArgs>
+		<vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+	</launcherArgs>
+	<windowImages/>
+	<launcher>
+		<solaris/>
+		<win useIco="false">
+			<bmp/>
+		</win>
+	</launcher>
+	<vm></vm>
+	<features>            
+        <feature id="com.xafero.dynkt.feature"
+            version="0.12.613"/>
+	</features>
+</product>
