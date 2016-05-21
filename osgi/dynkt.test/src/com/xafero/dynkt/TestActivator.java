@@ -1,13 +1,13 @@
 package com.xafero.dynkt;
 
+import java.util.logging.Logger;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestActivator implements BundleActivator {
 
-	private final Logger log = LoggerFactory.getLogger(TestActivator.class);
+	private final Logger log = Logger.getLogger(TestActivator.class + "");
 
 	private static BundleContext context;
 

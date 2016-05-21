@@ -2,11 +2,11 @@
 <feature
       id="com.xafero.dynkt.feature"
       label="DynKt"
-      version="0.12.613"
+      version="1.0.0.qualifier"
       provider-name="xafero">
 
    <description>
-      This is a JSR-223 scripting engine for the language "Kotlin".
+      This is a JSR-223 scripting engine for the language &quot;Kotlin&quot;.
    </description>
 
    <copyright>
@@ -26,10 +26,6 @@ Unless required by applicable law or agreed to in writing, software
  limitations under the License.
    </license>
 
-  <!-- <url>
-      <update label="DynKt Update Site" url="http://dynkt.xafero.com/update"/>
-   </url> -->
-
    <requires>
       <import plugin="org.eclipse.osgi"/>
    </requires>
@@ -47,5 +43,5 @@ Unless required by applicable law or agreed to in writing, software
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-		 
+
 </feature>

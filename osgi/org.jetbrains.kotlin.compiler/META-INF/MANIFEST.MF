@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JetBrains Kotlin Compiler
 Bundle-SymbolicName: org.jetbrains.kotlin.compiler
-Bundle-Version: 0.12.613
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  kotlin-compiler-0.12.613.jar
 Export-Package: com.google.common.base,
