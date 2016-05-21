@@ -11,4 +11,4 @@ Bundle-ClassPath: .,
  lib/dynkt-jsr223-0.4.jar
 Require-Bundle: org.jetbrains.kotlin.compiler
 Service-Component: OSGI-INF/*.xml
-Export-Package: com.xafero.dynkt.osgi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
