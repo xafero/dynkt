@@ -5,12 +5,18 @@ Bundle-SymbolicName: com.xafero.dynkt;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.xafero.dynkt.Activator
 Bundle-Vendor: xafero
-Import-Package: org.osgi.framework
+Import-Package: javax.management,
+ javax.management.remote,
+ javax.script,
+ org.osgi.framework,
+ org.jetbrains.kotlin.utils
 Bundle-ClassPath: .,
+ lib/slf4j-api-1.7.21.jar,
  lib/dynkt-jsr223-0.4.jar
 Require-Bundle: org.jetbrains.kotlin.compiler
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.xafero.dynkt,
  com.xafero.dynkt.core,
- com.xafero.dynkt.util
+ com.xafero.dynkt.util,
+ org.apache.felix.mishell

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 
+import org.apache.felix.mishell.OSGiScriptEngineManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,6 +47,16 @@ public class CoreTest {
 	public void testScriptEngineWithLoader() {
 		ScriptEngineManager mgr = new ScriptEngineManager(loader);
 		assertEquals(0, mgr.getEngineFactories().size());
+	}
+
+	@Test
+	public void testScriptEngineWithFelix() {
+		BundleContext ctx = TestActivator.getContext();
+		ScriptEngineManager mgr = new OSGiScriptEngineManager(ctx);
+		List<ScriptEngineFactory> factories = mgr.getEngineFactories();
+		assertEquals(1, factories.size());
+		ScriptEngineFactory myFact = factories.get(0);
+		assertEquals("Kotlin", myFact.getLanguageName());
 	}
 
 	@AfterClass
