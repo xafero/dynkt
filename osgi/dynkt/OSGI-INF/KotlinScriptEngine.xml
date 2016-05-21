@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
-	                  name="com.xafero.kotlin.script.ScriptEngine">
-	<implementation  class="com.xafero.kotlin.script.ScriptEngine" />
+	                  name="com.xafero.dynkt.KotlinScriptEngine">
+	<implementation  class="com.xafero.dynkt.KotlinScriptEngine" />
 	<service>
 		<provide interface="javax.script.ScriptEngine" />
 	</service>
