@@ -11,3 +11,6 @@ Bundle-ClassPath: .,
 Require-Bundle: org.jetbrains.kotlin.compiler
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.xafero.dynkt,
+ com.xafero.dynkt.core,
+ com.xafero.dynkt.util
