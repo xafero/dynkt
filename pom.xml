@@ -26,6 +26,7 @@
 		<module>osgi/org.jetbrains.kotlin.compiler</module>
 		<module>osgi/dynkt</module>
 		<module>osgi/dynkt.feature</module>
+		<module>osgi/dynkt.test</module>
 	</modules>
 
 	<build>
