@@ -5,9 +5,9 @@ import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Activator implements BundleActivator {
+public class TestActivator implements BundleActivator {
 
-	private final Logger log = LoggerFactory.getLogger(Activator.class);
+	private final Logger log = LoggerFactory.getLogger(TestActivator.class);
 
 	private static BundleContext context;
 

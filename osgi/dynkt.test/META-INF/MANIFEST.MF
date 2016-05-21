@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DynKt Tests
 Bundle-SymbolicName: com.xafero.dynkt.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.xafero.dynkt.tests.TestActivator
+Bundle-Activator: com.xafero.dynkt.TestActivator
 Bundle-Vendor: xafero
 Import-Package: org.junit,
  org.osgi.framework,
