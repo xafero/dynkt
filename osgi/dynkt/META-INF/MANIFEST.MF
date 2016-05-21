@@ -8,8 +8,8 @@ Bundle-Vendor: xafero
 Import-Package: javax.management,
  javax.management.remote,
  javax.script,
- org.osgi.framework,
- org.jetbrains.kotlin.utils
+ org.jetbrains.kotlin.utils,
+ org.osgi.framework
 Bundle-ClassPath: .,
  lib/slf4j-api-1.7.21.jar,
  lib/dynkt-jsr223-0.4.jar
