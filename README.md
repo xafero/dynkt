@@ -1,10 +1,12 @@
 # dynkt
 This is a JSR-223 scripting engine for the language "Kotlin"
 
+## What is that and this?
+- **dynkt**: The core source code of this project
+- **dynkt-osgi**: Addon as OSGi bundle with batteries included
+
 ## How to build?
-1. mvn clean package install -f osgi/dynkt.target/pom.xml
-2. mvn clean package install
-3. mvn clean package -f osgi/dynkt.product/pom.xml
+mvn clean package install
 
 ## License
 Everything is free to use under the terms of attached LICENSE file.
