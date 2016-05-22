@@ -2,9 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.xafero.dynkt</groupId>
+	<parent>
+		<groupId>com.xafero.dynkt</groupId>
+		<artifactId>dynkt-complete</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
 	<artifactId>dynkt-jsr223</artifactId>
-	<version>0.4</version>
 	<packaging>jar</packaging>
 
 	<name>DynKT (Dynamic Kotlin)</name>
@@ -15,6 +20,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<kotlin.version>0.12.613</kotlin.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		<commons.io.version>2.5</commons.io.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencies>
@@ -22,31 +31,31 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-compiler</artifactId>
-			<version>0.12.613</version>
+			<version>${kotlin.version}</version>
 		</dependency>
 		<!-- Helpers -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<version>${commons.io.version}</version>
 		</dependency>
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.12</version>
+			<version>${slf4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

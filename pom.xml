@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.xafero.dynkt</groupId>
 	<artifactId>dynkt-complete</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -12,68 +12,15 @@
 	<name>DynKT (Dynamic Kotlin) complete</name>
 	<description>This is a JSR-223 scripting engine for the language "Kotlin"</description>
 	<url>https://github.com/xafero/dynkt</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<tycho.version>0.24.0</tycho.version>
 	</properties>
 
 	<modules>
 		<module>dynkt</module>		
-		<module>osgi/dynkt.target</module>
-		<module>osgi/org.jetbrains.kotlin.compiler</module>
-		<module>osgi/dynkt</module>
-		<module>osgi/dynkt.feature</module>
-		<module>osgi/dynkt.test</module>
+		<module>dynkt-osgi</module>
 	</modules>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<version>${tycho.version}</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho.version}</version>
-				<configuration>
-					<target>
-						<artifact>
-							<groupId>com.xafero.dynkt</groupId>
-							<artifactId>dynkt</artifactId>
-							<version>1.0</version>
-						</artifact>
-					</target>
-					<dependency-resolution>
-						<optionalDependencies>ignore</optionalDependencies>
-					</dependency-resolution>
-					<environments>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
-					</environments>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<repositories>
-		<repository>
-			<id>indigo-sr2</id>
-			<url>http://download.eclipse.org/eclipse/updates/3.7</url>
-			<layout>p2</layout>
-		</repository>
-	</repositories>
 </project>

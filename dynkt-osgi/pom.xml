@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.xafero.dynkt</groupId>
+		<artifactId>dynkt-complete</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>dynkt-jsr223-osgi</artifactId>
+	<packaging>jar</packaging>
+
+	<name>DynKT (Dynamic Kotlin) OSGi Bundle</name>
+	<description>This is a JSR-223 scripting engine for the language "Kotlin"</description>
+	<url>https://github.com/xafero/dynkt</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>		
+	</properties>
+
+	<dependencies>
+		<!-- Script engine -->
+		<dependency>
+			<groupId>com.xafero.dynkt</groupId>
+			<artifactId>dynkt-jsr223</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-everything</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeScope>compile</includeScope>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<excludes>**/MANIFEST.MF</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+						<configuration>
+							<excludeDependencies>true</excludeDependencies>
+							<instructions>
+								<Import-Package>!kotlin.*,*</Import-Package>
+								<Export-Package>*.internal,*</Export-Package>
+							</instructions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<useDefaultManifestFile>true</useDefaultManifestFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
