@@ -64,8 +64,8 @@
 						<configuration>
 							<excludeDependencies>true</excludeDependencies>
 							<instructions>
-								<Import-Package>!kotlin.*,*</Import-Package>
-								<Export-Package>*.internal,*</Export-Package>
+								<Import-Package>javax.script</Import-Package>
+								<Export-Package>com.xafero.dynkt</Export-Package>
 							</instructions>
 						</configuration>
 					</execution>
