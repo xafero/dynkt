@@ -9,9 +9,9 @@ This is a JSR-223 scripting engine for the language "Kotlin"
 `mvn clean package install`
 
 ## How to run in OSGi?
-> java -jar bin\felix.jar
-> g! install file:/./dynkt-jsr223-osgi-1.0.0-SNAPSHOT.jar
-> g! start 5
+1. Run your container: `java -jar bin\felix.jar`
+2. Install the bundle: `g! install file:/./dynkt-jsr223-osgi-1.0.0-SNAPSHOT.jar`
+3. Start it: `g! start 5`
 
 ## License
 Everything is free to use under the terms of attached LICENSE file.
