@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.xafero.dynkt</groupId>
 		<artifactId>dynkt-complete</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -13,7 +13,7 @@
 	<packaging>jar</packaging>
 
 	<name>DynKT (Dynamic Kotlin) OSGi Bundle</name>
-	<description>This is a JSR-223 scripting engine for the language "Kotlin"</description>
+	<description>This is a JSR-223 scripting engine for the language "Kotlin".</description>
 	<url>https://github.com/xafero/dynkt</url>
 
 	<properties>
