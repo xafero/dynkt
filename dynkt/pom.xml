@@ -13,7 +13,7 @@
 	<packaging>jar</packaging>
 
 	<name>DynKT (Dynamic Kotlin)</name>
-	<description>This is a JSR-223 scripting engine for the language "Kotlin"</description>
+	<description>This is a JSR-223 scripting engine for the language "Kotlin".</description>
 	<url>https://github.com/xafero/dynkt</url>
 
 	<properties>
