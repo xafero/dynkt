@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.xafero.dynkt</groupId>
 		<artifactId>dynkt-complete</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -25,6 +25,18 @@
 		<commons.io.version>2.5</commons.io.version>
 		<junit.version>4.12</junit.version>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>GNU Affero General Public License 3.0</name>
+			<url>http://www.gnu.org/licenses/agpl-3.0.en.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/xafero/dynktn</url>
+	</scm>
 
 	<dependencies>
 		<!-- Compiler -->
