@@ -20,7 +20,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<kotlin.version>0.12.613</kotlin.version>
+		<kotlin.version>1.0.2</kotlin.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<commons.io.version>2.5</commons.io.version>
 		<junit.version>4.12</junit.version>
@@ -30,7 +30,7 @@
 		<!-- Compiler -->
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-compiler</artifactId>
+			<artifactId>kotlin-compiler-embeddable</artifactId>
 			<version>${kotlin.version}</version>
 		</dependency>
 		<!-- Helpers -->

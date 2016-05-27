@@ -34,7 +34,7 @@ public class KotlinScriptEngineFactoryTest {
 
 	@Test
 	public void testGetEngineVersion() {
-		assertEquals("0.12.613", factory.getEngineVersion());
+		assertEquals("1.0.2", factory.getEngineVersion());
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class KotlinScriptEngineFactoryTest {
 
 	@Test
 	public void testGetLanguageVersion() {
-		assertEquals("0.12.613", factory.getLanguageVersion());
+		assertEquals("1.0.2", factory.getLanguageVersion());
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class KotlinScriptEngineFactoryTest {
 
 	@Test
 	public void testGetParameter() {
-		assertEquals("0.12.613", factory.getParameter(ScriptEngine.LANGUAGE_VERSION));
+		assertEquals("1.0.2", factory.getParameter(ScriptEngine.LANGUAGE_VERSION));
 	}
 
 	@Test

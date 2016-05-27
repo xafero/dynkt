@@ -1,28 +1,30 @@
 package com.xafero.dynkt.core;
 
-import static org.jetbrains.kotlin.cli.jvm.config.ConfigPackage.addJvmClasspathRoots;
-import static org.jetbrains.kotlin.config.ConfigPackage.addKotlinSourceRoot;
+import static org.jetbrains.kotlin.cli.jvm.config.JvmContentRootsKt.addJvmClasspathRoots;
+import static org.jetbrains.kotlin.config.ContentRootsKt.addKotlinSourceRoot;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jetbrains.kotlin.builtins.KotlinBuiltIns;
+import org.jetbrains.kotlin.builtins.DefaultBuiltIns;
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys;
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments;
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation;
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity;
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector;
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler;
-import org.jetbrains.kotlin.cli.jvm.compiler.CommandLineScriptUtils;
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler;
 import org.jetbrains.kotlin.cli.jvm.config.JVMConfigurationKeys;
+import org.jetbrains.kotlin.config.CommonConfigurationKeys;
 import org.jetbrains.kotlin.config.CompilerConfiguration;
 import org.jetbrains.kotlin.name.Name;
-import org.jetbrains.kotlin.resolve.AnalyzerScriptParameter;
-import org.jetbrains.kotlin.types.JetType;
+import org.jetbrains.kotlin.script.KotlinScriptDefinition;
+import org.jetbrains.kotlin.script.ScriptParameter;
+import org.jetbrains.kotlin.script.StandardScriptDefinition;
+import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.utils.KotlinPaths;
 import org.jetbrains.kotlin.utils.PathUtil;
 import org.slf4j.Logger;
@@ -48,7 +50,7 @@ public class KotlinCompiler implements MessageCollector, Disposable {
 		CompilerConfiguration config = createCompilerConfig(file);
 		config = addCurrentClassPath(config);
 		KotlinCoreEnvironment env = KotlinCoreEnvironment.createForProduction(this, config, configPaths);
-		return KotlinToJVMBytecodeCompiler.compileScript(config, paths, env);
+		return KotlinToJVMBytecodeCompiler.INSTANCE.compileScript(config, paths, env);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,8 +58,8 @@ public class KotlinCompiler implements MessageCollector, Disposable {
 		K2JVMCompilerArguments cmpArgs = new K2JVMCompilerArguments();
 		cmpArgs.classpath = System.getProperty("java.class.path");
 		cmpArgs.noStdlib = true;
-		addJvmClasspathRoots(config,
-				(List<File>) ReflUtils.invoke(K2JVMCompiler.class, null, "getClasspath", paths, cmpArgs));
+		addJvmClasspathRoots(config, (List<File>) ReflUtils.invoke(K2JVMCompiler.Companion.class, null,
+				"access$getClasspath", K2JVMCompiler.Companion, paths, cmpArgs));
 		return config;
 	}
 
@@ -65,14 +67,20 @@ public class KotlinCompiler implements MessageCollector, Disposable {
 		CompilerConfiguration config = new CompilerConfiguration();
 		config.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, this);
 		// Put arguments as field
-		List<AnalyzerScriptParameter> scriptParams = new LinkedList<AnalyzerScriptParameter>();
-		scriptParams.addAll(CommandLineScriptUtils.scriptParameters());
+		MemoryScriptDefinition memDef = new MemoryScriptDefinition();
+		memDef.inject(StandardScriptDefinition.INSTANCE);
 		// Bundle injection
-		JetType type = KotlinBuiltIns.getInstance().getMutableMap().getDefaultType();
+		List<ScriptParameter> scriptParams = new LinkedList<ScriptParameter>();
+		KotlinType type = DefaultBuiltIns.getInstance().getMutableMap().getDefaultType();
 		Name ctxName = Name.identifier("ctx");
-		scriptParams.add(new AnalyzerScriptParameter(ctxName, type));
+		scriptParams.add(new ScriptParameter(ctxName, type));
+		memDef.inject(scriptParams);
+		// Set definitions
+		List<KotlinScriptDefinition> scriptDefs = new LinkedList<KotlinScriptDefinition>();
+		scriptDefs.add(memDef);
 		// Finish configuration
-		config.put(JVMConfigurationKeys.SCRIPT_PARAMETERS, scriptParams);
+		config.put(JVMConfigurationKeys.MODULE_NAME, "dynamic");
+		config.put(CommonConfigurationKeys.SCRIPT_DEFINITIONS_KEY, scriptDefs);
 		addJvmClasspathRoots(config, PathUtil.getJdkClassesRoots());
 		addKotlinSourceRoot(config, file.getAbsolutePath());
 		return config;
