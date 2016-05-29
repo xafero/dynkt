@@ -10,17 +10,11 @@
 	</parent>
 
 	<artifactId>dynkt-jsr223-osgi</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<name>DynKT (Dynamic Kotlin) OSGi Bundle</name>
 	<description>This is a JSR-223 scripting engine for the language "Kotlin".</description>
 	<url>https://github.com/xafero/dynkt</url>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>		
-	</properties>
 
 	<dependencies>
 		<!-- Script engine -->
@@ -34,56 +28,28 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-everything</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeScope>compile</includeScope>
-							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
-							<excludes>**/MANIFEST.MF</excludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
+				<version>1.4.0</version>
 				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<id>bundle-manifest</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>manifest</goal>
-						</goals>
-						<configuration>
-							<excludeDependencies>true</excludeDependencies>
-							<instructions>
-								<Import-Package>javax.script,javax.swing.text.html,sun.misc</Import-Package>
-								<Export-Package>com.xafero.dynkt</Export-Package>
-							</instructions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-jar</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<useDefaultManifestFile>true</useDefaultManifestFile>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<unpackBundle>true</unpackBundle>
+					<excludeDependencies>true</excludeDependencies>
+					<instructions>
+						<Import-Package>
+							apple.awt;resolution:=optional,
+							org.imgscalr;resolution:=optional,
+							org.objectweb.asm;resolution:=optional,
+							!org.junit,
+							*
+						</Import-Package>
+						<Export-Package>com.xafero.dynkt</Export-Package>
+						<DynamicImport-Package>*</DynamicImport-Package>
+						<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<Service-Component>OSGI-INF/serviceComponents.xml</Service-Component>
+					</instructions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
