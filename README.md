@@ -1,6 +1,8 @@
 # dynkt
 This is a JSR-223 scripting engine for the language "Kotlin"
 
+[![Build Status](https://travis-ci.org/xafero/dynkt.svg?branch=master)](https://travis-ci.org/xafero/dynkt)
+
 ## What is that and this?
 - **dynkt**: The core source code of this project
 - **dynkt-osgi**: Addon as OSGi bundle with batteries included
