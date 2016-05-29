@@ -64,7 +64,7 @@
 						<configuration>
 							<excludeDependencies>true</excludeDependencies>
 							<instructions>
-								<Import-Package>javax.script</Import-Package>
+								<Import-Package>javax.script,javax.swing.text.html,sun.misc</Import-Package>
 								<Export-Package>com.xafero.dynkt</Export-Package>
 							</instructions>
 						</configuration>
