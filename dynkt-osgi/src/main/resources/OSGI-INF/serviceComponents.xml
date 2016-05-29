@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="KotlinScriptEngineFactory">
+    <implementation class="com.xafero.dynkt.KotlinScriptEngineFactory"/>
+    <property name="service.description" value="Kotlin ScriptEngineFactory Implementation (JSR-223)"/>
+    <property name="service.vendor" value="com.xafero"/>
+    <service>
+        <provide interface="javax.script.ScriptEngineFactory"/>
+    </service>
+</scr:component>
