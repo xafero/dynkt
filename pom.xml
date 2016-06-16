@@ -23,4 +23,12 @@
 		<module>dynkt</module>
 		<module>dynkt-osgi</module>
 	</modules>
+
+	<distributionManagement>
+		<repository>
+			<id>bintray-xafero</id>
+			<name>xafero-source</name>
+			<url>https://api.bintray.com/maven/xafero-solutions/xafero-source/DynKT/;publish=1</url>
+		</repository>
+	</distributionManagement>	
 </project>
